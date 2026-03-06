@@ -150,7 +150,7 @@ You can pass an array of arguments to override the image's `CMD` while keeping t
 .addDaemon('postgres', {
   subcontainer: postgresSub,
   exec: {
-    command: sdk.useEntrypoint(['-c', 'random_page_cost=1.0']),
+    command: sdk.useEntrypoint(['-c', 'listen_addresses=127.0.0.1']),
   },
   // ...
 })
@@ -288,6 +288,184 @@ The `user` option is optional. If omitted, commands run as the default user defi
 - The command failure is not critical (warnings, optional setup)
 - You need to inspect the exit code or output regardless of success/failure
 - You want custom error handling logic
+
+## PostgreSQL Sidecar
+
+Many services require a PostgreSQL database. Run it as a sidecar daemon within the same service package.
+
+### Security Model
+
+Use password authentication with localhost-only binding. Auto-generate the password on install and store it in your `store.json` FileModel.
+
+**Password generation** (in `utils.ts`):
+
+```typescript
+import { utils } from "@start9labs/start-sdk";
+
+export function getDefaultPgPassword(): string {
+  return utils.getDefaultString({ charset: "a-z,A-Z,0-9", len: 22 });
+}
+```
+
+**Store schema** (in `fileModels/store.json.ts`):
+
+```typescript
+const shape = z.object({
+  pgPassword: z.string().catch(""),
+  // ...other fields
+});
+```
+
+**Seed on install** (in `init/seedFiles.ts`):
+
+```typescript
+export const seedFiles = sdk.setupOnInit(async (effects, kind) => {
+  if (kind !== "install") return;
+  await storeJson.merge(effects, {
+    pgPassword: getDefaultPgPassword(),
+  });
+});
+```
+
+**Seed on upgrade** (in version migration):
+
+```typescript
+// Generate pgPassword for users upgrading from a version that didn't have one
+const existing = await storeJson.read((s) => s.pgPassword).once();
+await storeJson.merge(effects, {
+  pgPassword: existing || getDefaultPgPassword(),
+});
+```
+
+### Daemon Configuration
+
+```typescript
+import { sdk } from "./sdk";
+import { i18n } from "./i18n";
+
+// Read password from store
+const pgPassword = store.pgPassword;
+
+// Define mounts for PostgreSQL data
+const pgMounts = sdk.Mounts.of().mountVolume({
+  volumeId: "main",
+  subpath: "postgresql",
+  mountpoint: "/var/lib/postgresql",
+  readonly: false,
+});
+
+// Create subcontainer
+const postgresSub = await sdk.SubContainer.of(
+  effects,
+  { imageId: "postgres" },
+  pgMounts,
+  "postgres",
+);
+
+// Add as daemon
+.addDaemon('postgres', {
+  subcontainer: postgresSub,
+  exec: {
+    command: sdk.useEntrypoint(['-c', 'listen_addresses=127.0.0.1']),
+    env: {
+      POSTGRES_PASSWORD: pgPassword,
+    },
+  },
+  ready: {
+    display: null, // Internal service, not shown in UI
+    fn: async () => {
+      const result = await postgresSub.exec([
+        'pg_isready', '-q', '-h', '127.0.0.1',
+        '-d', 'postgres', '-U', 'postgres',
+      ])
+      if (result.exitCode !== 0) {
+        return {
+          result: 'loading',
+          message: i18n('Waiting for PostgreSQL to be ready'),
+        }
+      }
+      return {
+        result: 'success',
+        message: i18n('PostgreSQL is ready'),
+      }
+    },
+  },
+  requires: [],
+})
+```
+
+Key points:
+- **`listen_addresses=127.0.0.1`**: Restricts connections to localhost only — no external access
+- **`POSTGRES_PASSWORD`**: Auto-generated password, stored in `store.json`
+- **`display: null`**: Internal sidecar health checks are typically not shown to the user
+
+### Connection Strings
+
+When the upstream service needs a PostgreSQL connection string, include the password:
+
+```typescript
+.addDaemon('app', {
+  subcontainer: appSub,
+  exec: {
+    command: sdk.useEntrypoint(),
+    env: {
+      // .NET-style connection string
+      DATABASE_URL: `User ID=postgres;Password=${pgPassword};Host=127.0.0.1;Port=5432;Database=mydb`,
+      // Or standard PostgreSQL URI
+      DATABASE_URL: `postgresql://postgres:${pgPassword}@127.0.0.1:5432/mydb`,
+    },
+  },
+  requires: ['postgres'],
+})
+```
+
+> [!NOTE]
+> The Docker entrypoint for the official `postgres` image handles initial database creation automatically. You do not need to run `createdb` or `initdb` manually on fresh installs.
+
+### Querying PostgreSQL from Actions
+
+Some actions need to query PostgreSQL directly (e.g., resetting a user password). Read the password from the store:
+
+```typescript
+import { Client } from 'pg'
+
+const pgPassword = (await storeJson.read((s) => s.pgPassword).once()) || ''
+
+const client = new Client({
+  user: 'postgres',
+  password: pgPassword,
+  host: '127.0.0.1',
+  database: 'mydb',
+  port: 5432,
+})
+
+try {
+  await client.connect()
+  await client.query(
+    `UPDATE "Users" SET "PasswordHash"=$1 WHERE "Id"=$2`,
+    [hash, userId],
+  )
+} finally {
+  await client.end()
+}
+```
+
+> [!WARNING]
+> When interpolating values into raw SQL strings (e.g., for `psql -c`), always escape single quotes to prevent SQL injection:
+>
+> ```typescript
+> function sqlLiteral(value: string): string {
+>   return `'${value.replace(/'/g, "''")}'`
+> }
+>
+> // Use in psql commands
+> await sub.execFail(
+>   ['psql', '-c', `ALTER USER myuser PASSWORD ${sqlLiteral(password)}`],
+>   { user: 'postgres' },
+> )
+> ```
+>
+> Prefer parameterized queries (the `$1` syntax above) whenever possible — they handle escaping automatically.
 
 ## Config File Generation
 

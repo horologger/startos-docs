@@ -185,35 +185,34 @@ migrations: {
 > [!WARNING]
 > Migrations are only for migrating data that is _not_ migrated by the upstream service itself.
 
-## preInstall vs setupOnInit
+## setupOnInit
 
-The `preInstall` function in `versionGraph.ts` and custom init functions registered via `setupOnInit` both run during installation, but at different points in the init sequence.
+Use `sdk.setupOnInit()` to run setup logic during installation, restore, or container rebuild. It receives a `kind` parameter:
 
-### Use preInstall for:
+| Kind | When it runs |
+|------|-------------|
+| `'install'` | Fresh install |
+| `'restore'` | Restoring from backup |
+| `null` | Container rebuild (no data changes) |
 
-- Bootstrapping config files (writing initial FileModel values)
-- Generating passwords and secrets
-- Any setup that does **not** depend on interfaces, actions, or other init steps
+### Bootstrapping Config Files
 
-`preInstall` runs early — before interfaces, dependencies, and actions are set up.
+Generate passwords, write initial config files, and seed stores on fresh install:
 
 ```typescript
-// versionGraph.ts
-export const versionGraph = VersionGraph.of({
-  current,
-  other,
-  preInstall: async (effects) => {
-    const postgresPassword = utils.getDefaultString({ charset: 'a-z,A-Z,0-9', len: 22 })
-    await storeJson.write(effects, { postgresPassword })
-    await configToml.write(effects, { /* initial config */ })
-  },
+// init/seedFiles.ts
+export const seedFiles = sdk.setupOnInit(async (effects, kind) => {
+  if (kind !== 'install') return
+
+  const secretKey = utils.getDefaultString({ charset: 'a-z,A-Z,0-9', len: 32 })
+  await storeJson.merge(effects, { secretKey })
+  await configToml.merge(effects, { /* initial config */ })
 })
 ```
 
-### Use setupOnInit for:
+### Creating Tasks
 
-- Creating tasks (tasks reference actions, which aren't available until after `actions` runs in the init sequence)
-- Any setup that depends on a prior init step
+Tasks reference actions, so they must be created in a `setupOnInit` that runs after actions are registered in the init sequence:
 
 ```typescript
 // init/initializeService.ts
@@ -224,6 +223,3 @@ export const initializeService = sdk.setupOnInit(async (effects, kind) => {
   })
 })
 ```
-
-> [!WARNING]
-> Do **not** create tasks in `preInstall`. Tasks reference actions, and actions are not registered until later in the init sequence. Creating a task in `preInstall` will fail.
