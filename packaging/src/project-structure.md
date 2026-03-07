@@ -73,11 +73,11 @@ name: Build Service
 on:
   workflow_dispatch:
   pull_request:
-    paths-ignore: ['*.md']
-    branches: ['main', 'master']
+    paths-ignore: ["*.md"]
+    branches: ["master"]
   push:
-    paths-ignore: ['*.md']
-    branches: ['main', 'master']
+    paths-ignore: ["*.md"]
+    branches: ["master"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
@@ -99,7 +99,7 @@ name: Release Service
 on:
   push:
     tags:
-      - 'v*.*'
+      - "v*.*"
 
 jobs:
   release:
@@ -117,7 +117,7 @@ jobs:
 
 ### CONTRIBUTING.md
 
-Build instructions for contributors. Keep it short -- link to the [StartOS Packaging Guide](https://docs.start9.com/packaging-guide/) for environment setup, then provide `npm ci` and `make` as a quick start.
+Build instructions for contributors. Keep it short -- link to the [StartOS Packaging Guide](https://docs.start9.com/packaging/) for environment setup, then provide `npm ci` and `make` as a quick start.
 
 ### Dockerfile (optional)
 

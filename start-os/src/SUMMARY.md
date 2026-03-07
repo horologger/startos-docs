@@ -20,6 +20,7 @@
   - [System Settings](user-manual/system-settings.md)
   - [Installing Services](user-manual/installing-services.md)
   - [Gateways](user-manual/gateways.md)
+  - [DNS](user-manual/dns.md)
   - [Creating Backups](user-manual/backup-create.md)
   - [Restoring Backups](user-manual/backup-restore.md)
   - [SMTP](user-manual/smtp.md)

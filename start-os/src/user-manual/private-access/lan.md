@@ -44,26 +44,4 @@ Similar to your local domain, private domains can only be accessed when connecte
 
 ### DNS for Private Domains
 
-When you add a private domain, StartOS automatically creates a DNS record on its internal DNS server. For this to work, your gateway must use StartOS for DNS. StartOS will test this automatically and guide you through the setup if needed. The details depend on your gateway type:
-
-- **Router**: Set StartOS as your router's primary DNS server. All routers support this feature. Refer to your router's user manual for detailed instructions.
-
-  > [!WARNING]
-  > It is possible that StartOS is already using your router for DNS. Therefore you cannot instruct your router to use StartOS for DNS. This is circular. If StartOS detects a potential circular DNS situation, it will warn you. To resolve this issue, override [the DNS servers used by StartOS](#server-dns-settings) to no longer use your router.
-
-- **StartTunnel**: SSH into your StartTunnel VPS and run the following command
-
-      start-tunnel dns defer
-
-If your private domain is a real domain that you control, you can alternatively configure its DNS record at your registrar to resolve to your server's _LAN IP address_. In this case, the StartOS DNS server is not needed.
-
-## Server DNS Settings
-
-StartOS uses the DNS servers provided by your router via [DHCP](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol). For most users, the default settings require no changes.
-
-> [!NOTE]
-> If you want to use a specific DNS provider (such as Cloudflare or Quad9), it is generally better to configure it in your router so that all devices on your network benefit, not just your server.
-
-To view the current DNS servers, navigate to `System > DNS`.
-
-To override the defaults, select "Static" and provide up to three DNS servers in order of preference.
+Private domains require your gateway to use StartOS for DNS. StartOS will test this automatically when you add a private domain and guide you through the setup if needed. For more details, see [DNS](../dns.md).
