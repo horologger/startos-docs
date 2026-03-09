@@ -69,6 +69,12 @@ This means your client device failed to connect to the server. This can happen f
 1. If after completing the steps above, you still cannot connect using any address from any client, then you will likely need to manually power cycle the server.
 1. If power cycling the server does not resolve the issue, please contact support.
 
+## A public domain still loads after disabling it
+
+If you previously had a service interface (or the StartOS UI) publicly accessible on a StartTunnel gateway and then disabled it, your browser may still load the page from cache. Attempting to interact will time out because the port forwarding is still active but the interface is no longer being served.
+
+To resolve this, fully quit and restart your browser. A hard refresh or private window is usually not enough — browsers cache TCP connections more aggressively than page content, and sometimes only a full process restart will clear them.
+
 ## Clock Sync Failure
 
 This means your server was unable to sync its clock with the Internet using the Network Time Protocol (NTP). This is usually due to a firewall issue with your network/router. Make sure you are not blocking NTP. If the issue persists, please contact support.
