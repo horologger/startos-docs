@@ -65,7 +65,7 @@ sdk.createInterface(effects, {
   id: 'unique-id',                 // Used in sdk.serviceInterface.getOwn()
   description: i18n('Description'),// Shown in UI (wrap with i18n)
   type: 'ui',                      // 'ui' or 'api'
-  masked: false,                   // Hide from discovery?
+  masked: false,                   // Hide URLs with sensitive credentials?
   schemeOverride: null,            // Force 'https' or 'http'?
   username: null,                  // Auth username (if any)
   path: '/some/path/',             // URL path
@@ -79,7 +79,7 @@ sdk.createInterface(effects, {
 | `id` | `string` | Unique identifier. Used to retrieve this interface in [main.ts](./main.md) via `sdk.serviceInterface.getOwn()`. |
 | `description` | `string` | Description shown to the user. Wrap with `i18n()`. |
 | `type` | `'ui'` or `'api'` | Whether this interface is a user-facing UI or a programmatic API. |
-| `masked` | `boolean` | If `true`, the interface is hidden from service discovery. |
+| `masked` | `boolean` | If `true`, the interface URLs are hidden from the user. Use this for interfaces whose URLs contain sensitive credentials. |
 | `schemeOverride` | `string` or `null` | Force a specific URL scheme (`'https'` or `'http'`). Use `null` to let the system decide. |
 | `username` | `string` or `null` | Username for basic authentication, if required. |
 | `path` | `string` | URL path appended to the base address (e.g., `'/admin/'`). |
