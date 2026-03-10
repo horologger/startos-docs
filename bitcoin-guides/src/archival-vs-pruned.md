@@ -46,6 +46,16 @@ This means:
 >
 > On-demand block fetching adds a small delay when a service requests a pruned block, since the block must be downloaded from the network before it can be served. In practice this is rare — most services only need recent blocks during normal operation.
 
+## Managing Pruning on StartOS
+
+Pruning is controlled from the Bitcoin service's Actions menu: **Services > Bitcoin > Actions > Other**. From there you can enable or disable pruning and set the prune target (the amount of block data to retain, in MB).
+
+### Automatic pruning on small disks
+
+If your server's total disk capacity is under 900 GB, StartOS **enables pruning by default and enforces it** — you cannot disable it. The full blockchain (600+ GB and growing) would consume too much of the available space, leaving insufficient room for other services and system operations. On these drives, pruning is not optional.
+
+If your disk is 900 GB or larger, pruning is off by default and you can enable or disable it freely.
+
 ## Which Should You Choose?
 
 For most StartOS users, a **pruned node** is the best choice. Thanks to on-demand block fetching, you get compatibility with all major downstream services while using a fraction of the disk space.
@@ -53,7 +63,7 @@ For most StartOS users, a **pruned node** is the best choice. Thanks to on-deman
 Choose an **archival node** if:
 
 - You want to run a **block explorer** like Mempool — this is the one major use case that requires full historical block data and cannot be served by on-demand fetching.
-- You have the disk space and prefer having a complete local copy of the blockchain for its own sake.
+- You have the disk space (900 GB or more) and prefer having a complete local copy of the blockchain for its own sake.
 
 | Feature                          | Archival            | Pruned (on StartOS)                |
 | -------------------------------- | ------------------- | ---------------------------------- |

@@ -28,12 +28,14 @@ StartOS supports multiple Bitcoin and Lightning node implementations. You are no
 
 ### Bitcoin Nodes
 
-| Service           | Description                                                                                      |
+The Bitcoin service on StartOS is available in multiple flavors (implementations). The service is called **Bitcoin** regardless of which flavor you install — the flavor determines the underlying software.
+
+| Flavor            | Description                                                                                      |
 | ----------------- | ------------------------------------------------------------------------------------------------ |
 | **Bitcoin Core**  | The reference implementation — validates blocks, relays transactions, serves wallet data via RPC |
 | **Bitcoin Knots** | A Bitcoin Core derivative with additional configuration options and policy controls              |
 
-Both implementations provide the same RPC interface used by wallets and Electrum servers.
+Both flavors provide the same RPC interface used by wallets and Electrum servers.
 
 ### Lightning Nodes
 
