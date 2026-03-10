@@ -13,7 +13,7 @@ my-service-startos/
 │       ├── buildService.yml   # CI build on push/PR
 │       └── releaseService.yml # Release on tag push
 ├── assets/                 # Supplementary files (required, can be empty)
-│   └── README.md
+│   └── ABOUT.md
 ├── startos/                # Primary development directory
 │   ├── actions/            # User-facing action scripts
 │   ├── fileModels/         # Type-safe config file representations
@@ -145,7 +145,7 @@ Service documentation following the structure described in [Writing READMEs](./w
 
 ## assets/
 
-Stores supplementary files and scripts needed by the service, such as configuration generators. **Required** -- create with at least a README.md if empty. It should rarely be necessary to use this directory.
+Stores supplementary files and scripts needed by the service, such as configuration generators or entrypoint scripts. **Required** -- the `assets/` directory must exist and contain at least one file (e.g. `ABOUT.md`) for git to track it and for the build to succeed.
 
 ## startos/
 
