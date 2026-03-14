@@ -1,6 +1,6 @@
 # Marketplace
 
-The Marketplace is where you discover services to install on your StartOS server. IIt is a collection of independent registries, like stores in mall, each offering its own curated list of services.
+The Marketplace is where you discover services to install on your StartOS server. It is a collection of independent registries, like stores in a mall, each offering its own curated list of services.
 
 ## How It Works
 
