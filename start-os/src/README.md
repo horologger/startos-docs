@@ -1,33 +1,71 @@
-# StartOS
+# StartOS Documentation
 
-A Linux-based operating system purpose-built for running a personal server. Install, configure, and manage self-hosted services through a simple graphical interface — no command line required.
-
-- **App store experience** — discover and install services from a marketplace with one click
-- **Built-in networking** — LAN, Tor, VPN, and clearnet access managed through the UI
-- **Encrypted backups** — back up and restore services to physical drives or network shares
-- **No accounts, no cloud** — your server, your data, no third parties
+StartOS is a sovereign computing platform that makes it easy to run a personal server. It handles service installation, networking, backups, and system administration — all from a simple browser-based interface.
 
 ## Getting Started
 
-- [Installing StartOS](installing.md) — Flash StartOS to your hardware
-- [Initial Setup](user-manual/initial-setup.md) — Create your server and set a master password
-- [Trusting Your Root CA](user-manual/trust-ca.md) — Enable secure HTTPS over LAN
-- [Installing Services](user-manual/installing-services.md) — Browse and install from the marketplace
+- [Installing StartOS](installing-startos.md)
+- [Initial Setup](initial-setup.md)
+- [Trusting Your Root CA](trust-ca.md)
 
-## User Manual
+## Services
 
-- [Private Access](user-manual/private-access/) — Connect over LAN, VPN, Tor, or Holesail
-- [Public Access](user-manual/public-access/) — Expose services to the public internet
-- [Gateways](user-manual/gateways.md) — Configure WireGuard tunnels for outbound and inbound traffic
-- [Creating Backups](user-manual/backup-create.md) — Back up your services and system
-- [Restoring Backups](user-manual/backup-restore.md) — Restore from a previous backup
-- [SSH](user-manual/ssh.md) — Access StartOS from the command line
-- [Updating StartOS](user-manual/updating-startos.md) — Install the latest version
+- [Marketplace](marketplace.md)
+- [Default Registries](default-registries.md)
+- [Alternative Registries](alternative-registries.md)
+- [Installing](installing.md)
+- [Updating](updating.md)
+- [Sideloading](sideloading.md)
+- [Flavors](flavors.md)
+- [Interfaces](interfaces.md)
+- [Actions](actions.md)
+- [Health Checks](health-checks.md)
+- [Tasks](tasks.md)
+- [Dependencies](dependencies.md)
 
-## Learn More
+## Connecting
 
-- [Architecture](architecture.md) — How StartOS is designed and how its components fit together
-- [FAQ](faq/) — Common issues and solutions
-- [Service Packaging](/packaging/) — Build and publish services for StartOS
-- [Source Code](https://github.com/Start9Labs/start-os) — StartOS is fully open source
-- [Contact Support](https://start9.com/contact) — Get help from the Start9 team
+- [Private Access](private-access.md)
+- [Public Access](public-access.md)
+
+## Networking
+
+- [LAN](lan.md)
+- [mDNS](mdns.md)
+- [Inbound VPN](inbound-vpn.md)
+- [Outbound VPN](outbound-vpn.md)
+- [Tor](tor.md)
+- [Holesail](holesail.md)
+- [Clearnet](clearnet.md)
+- [Public IP](public-ip.md)
+- [Gateways](gateways.md)
+- [Private Domains](private-domains.md)
+- [DNS](dns.md)
+
+## Backups
+
+- [Creating Backups](backup-create.md)
+- [Restoring Backups](backup-restore.md)
+
+## System
+
+- [Server Name](server-name.md)
+- [SSH](ssh.md)
+- [SMTP](smtp.md)
+- [WiFi](wifi.md)
+- [Internationalization](internationalization.md)
+- [Kiosk Mode](kiosk-mode.md)
+- [Updating StartOS](updating-startos.md)
+- [Change Password](change-password.md)
+- [Forgot Password](forgot-password.md)
+
+## Reference
+
+- [CLI Reference](cli-reference.md)
+- [Architecture](architecture.md)
+- [FAQ](faq.md)
+
+## Firmware
+
+- [Server Pure](firmware-pure.md)
+- [Server One (2023)](firmware-one-2023.md)

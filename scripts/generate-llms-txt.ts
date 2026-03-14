@@ -28,11 +28,9 @@ type Book = {
   summaryPath: string;
 };
 
-type SummaryEntry = {
-  title: string;
-  path: string;
-  indent: number;
-};
+type SummaryItem =
+  | { kind: "part"; title: string }
+  | { kind: "page"; title: string; path: string; indent: number };
 
 /** Book metadata: display labels and one-line descriptions */
 const bookInfo: Record<string, { label: string; description: string }> = {
@@ -74,24 +72,38 @@ function discoverBooks(): Book[] {
   });
 }
 
-// Parse SUMMARY.md into a flat list of entries with indentation levels
-function parseSummary(summaryPath: string): SummaryEntry[] {
+// Parse SUMMARY.md into a flat list of part titles and page entries.
+// Part titles are `# Title` lines (after the first `# Summary` heading).
+// Page entries are `- [Title](path.md)` lines with indentation levels.
+function parseSummary(summaryPath: string): SummaryItem[] {
   const content = readFileSync(summaryPath, "utf-8");
-  const entries: SummaryEntry[] = [];
+  const items: SummaryItem[] = [];
+  let seenFirstHeading = false;
 
   for (const line of content.split("\n")) {
+    // Match part title lines like "# Services" (skip the first "# Summary")
+    const partMatch = line.match(/^#\s+(.+)$/);
+    if (partMatch) {
+      if (!seenFirstHeading) {
+        seenFirstHeading = true;
+        continue; // Skip "# Summary"
+      }
+      items.push({ kind: "part", title: partMatch[1].trim() });
+      continue;
+    }
+
     // Match lines like "- [Title](path.md)" or "  - [Title](path.md)"
-    const match = line.match(/^(\s*)-\s+\[([^\]]+)\]\(([^)]+)\)/);
-    if (!match) continue;
+    const pageMatch = line.match(/^(\s*)-\s+\[([^\]]+)\]\(([^)]+)\)/);
+    if (!pageMatch) continue;
 
-    const indent = match[1].length / 2; // 2-space indentation
-    const title = match[2];
-    const path = match[3];
+    const indent = pageMatch[1].length / 2; // 2-space indentation
+    const title = pageMatch[2];
+    const path = pageMatch[3];
 
-    entries.push({ title, path, indent });
+    items.push({ kind: "page", title, path, indent });
   }
 
-  return entries;
+  return items;
 }
 
 // Read a markdown file and extract its H1 title
@@ -186,7 +198,7 @@ function pathToUrl(bookName: string, relPath: string): string {
 // Render a page entry for llms.txt: title link, intro prose, sections
 function renderPageEntry(
   book: Book,
-  entry: SummaryEntry,
+  entry: Extract<SummaryItem, { kind: "page" }>,
   headingLevel: string,
 ): string[] {
   const page = readPage(book.srcDir, entry.path);
@@ -221,11 +233,14 @@ function generateBookLlmsTxt(book: Book): string {
 
   lines.push(`Full content: ${BASE_URL}/${book.name}/llms-full.txt`);
   lines.push("");
-  lines.push("## Pages");
-  lines.push("");
 
-  for (const entry of entries) {
-    lines.push(...renderPageEntry(book, entry, "###"));
+  for (const item of entries) {
+    if (item.kind === "part") {
+      lines.push(`## ${item.title}`);
+      lines.push("");
+    } else {
+      lines.push(...renderPageEntry(book, item, "###"));
+    }
   }
 
   return lines.join("\n");
@@ -241,17 +256,24 @@ function generateBookLlmsFullTxt(book: Book): string {
     parts.push("");
   }
 
-  for (const entry of entries) {
-    const page = readPage(book.srcDir, entry.path);
+  for (const item of entries) {
+    if (item.kind === "part") {
+      parts.push(`---`);
+      parts.push(`## ${item.title}`);
+      parts.push("");
+      continue;
+    }
+
+    const page = readPage(book.srcDir, item.path);
     if (!page) continue;
 
-    const title = page.title || entry.title;
+    const title = page.title || item.title;
     const body = page.content.trim();
 
     if (!body) continue;
 
     parts.push(`---`);
-    parts.push(`## Page: ${title}`);
+    parts.push(`### Page: ${title}`);
     parts.push("");
     parts.push(body);
     parts.push("");
@@ -286,8 +308,13 @@ function generateGlobalLlmsTxt(books: Book[]): string {
     lines.push(`## ${book.label}`);
     lines.push("");
 
-    for (const entry of entries) {
-      lines.push(...renderPageEntry(book, entry, "###"));
+    for (const item of entries) {
+      if (item.kind === "part") {
+        lines.push(`### ${item.title}`);
+        lines.push("");
+      } else {
+        lines.push(...renderPageEntry(book, item, "####"));
+      }
     }
   }
 
@@ -311,17 +338,24 @@ function generateGlobalLlmsFullTxt(books: Book[]): string {
     parts.push(`# ${book.label}`);
     parts.push("");
 
-    for (const entry of entries) {
-      const page = readPage(book.srcDir, entry.path);
+    for (const item of entries) {
+      if (item.kind === "part") {
+        parts.push(`---`);
+        parts.push(`## ${item.title}`);
+        parts.push("");
+        continue;
+      }
+
+      const page = readPage(book.srcDir, item.path);
       if (!page) continue;
 
-      const title = page.title || entry.title;
+      const title = page.title || item.title;
       const body = page.content.trim();
 
       if (!body) continue;
 
       parts.push(`---`);
-      parts.push(`## Page: ${title}`);
+      parts.push(`### Page: ${title}`);
       parts.push("");
       parts.push(body);
       parts.push("");

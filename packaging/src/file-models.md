@@ -219,6 +219,47 @@ const shape = object({
 })
 ```
 
+### Nested Object Defaults
+
+> [!WARNING]
+> `.catch()` does **not** cascade to child objects. When a parent key is missing entirely (e.g., parsing `{}`), validation fails at the parent level *before* any inner defaults can apply. This commonly causes install failures when seeding files with `merge(effects, {})`.
+
+**The problem:**
+
+```typescript
+// BROKEN: inner .catch() values never fire when "server" is missing
+const shape = z.object({
+  server: z.object({
+    host: z.string().catch('localhost'),
+    port: z.number().catch(8080),
+  }),
+})
+
+shape.parse({})
+// => ZodError: "server" expected object, received undefined
+```
+
+**The fix:** Extract sub-schemas and use `.catch(() => subSchema.parse({}))`:
+
+```typescript
+const serverSchema = z.object({
+  host: z.string().catch('localhost'),
+  port: z.number().catch(8080),
+})
+
+const shape = z.object({
+  server: serverSchema.catch(() => serverSchema.parse({})),
+})
+
+shape.parse({})
+// => { server: { host: 'localhost', port: 8080 } }
+```
+
+The `.catch()` callback delegates back to the sub-schema, so defaults are defined in exactly one place. This is essential for any file model seeded with `merge(effects, {})` on first install.
+
+> [!NOTE]
+> This pattern only works when **all** inner fields have `.catch()` defaults. If a nested object has required fields without defaults (e.g., a password that must be generated at init time), seed the file with complete data instead of relying on `merge(effects, {})`.
+
 ### Hardcoded Literal Values
 
 For values that should always be a specific literal and never change (e.g., internal ports, paths, auth modes), use `literal().onMismatch()`:

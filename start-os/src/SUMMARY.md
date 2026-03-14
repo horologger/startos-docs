@@ -1,40 +1,87 @@
 # Summary
 
-[StartOS](README.md)
+[StartOS Documentation](README.md)
 
 ---
 
-- [Installing StartOS](installing.md)
+# Getting Started
 
-- [User Manual](user-manual/README.md)
-  - [Initial Setup](user-manual/initial-setup.md)
-  - [Trusting Your Root CA](user-manual/trust-ca.md)
-  - [Private Access](user-manual/private-access/README.md)
-    - [LAN](user-manual/private-access/lan.md)
-    - [VPN](user-manual/private-access/vpn.md)
-    - [Tor](user-manual/private-access/tor.md)
-    - [Holesail](user-manual/private-access/holesail.md)
-  - [Public Access](user-manual/public-access/README.md)
-    - [Clearnet](user-manual/public-access/clearnet.md)
-    - [Tor](user-manual/public-access/tor.md)
-  - [System Settings](user-manual/system-settings.md)
-  - [Installing Services](user-manual/installing-services.md)
-  - [Gateways](user-manual/gateways.md)
-  - [DNS](user-manual/dns.md)
-  - [Creating Backups](user-manual/backup-create.md)
-  - [Restoring Backups](user-manual/backup-restore.md)
-  - [SMTP](user-manual/smtp.md)
-  - [SSH](user-manual/ssh.md)
-  - [WiFi](user-manual/wifi.md)
-  - [Updating StartOS](user-manual/updating-startos.md)
-  - [Resetting Your Password](user-manual/reset-password.md)
+- [Installing StartOS](installing-startos.md)
+- [Initial Setup](initial-setup.md)
+- [Trusting Your Root CA](trust-ca.md)
+
+---
+
+# Services
+
+- [Marketplace](marketplace.md)
+- [Default Registries](default-registries.md)
+- [Alternative Registries](alternative-registries.md)
+- [Installing](installing.md)
+- [Updating](updating.md)
+- [Sideloading](sideloading.md)
+- [Flavors](flavors.md)
+- [Interfaces](interfaces.md)
+- [Actions](actions.md)
+- [Health Checks](health-checks.md)
+- [Tasks](tasks.md)
+- [Dependencies](dependencies.md)
+
+---
+
+# Connecting
+
+- [Private Access](private-access.md)
+- [Public Access](public-access.md)
+
+---
+
+# Networking
+
+- [LAN](lan.md)
+- [mDNS](mdns.md)
+- [Inbound VPN](inbound-vpn.md)
+- [Outbound VPN](outbound-vpn.md)
+- [Tor](tor.md)
+- [Holesail](holesail.md)
+- [Clearnet](clearnet.md)
+- [Public IP](public-ip.md)
+- [Gateways](gateways.md)
+- [Private Domains](private-domains.md)
+- [DNS](dns.md)
+
+---
+
+# Backups
+
+- [Creating Backups](backup-create.md)
+- [Restoring Backups](backup-restore.md)
+
+---
+
+# System
+
+- [Server Name](server-name.md)
+- [SSH](ssh.md)
+- [SMTP](smtp.md)
+- [WiFi](wifi.md)
+- [Internationalization](internationalization.md)
+- [Kiosk Mode](kiosk-mode.md)
+- [Updating StartOS](updating-startos.md)
+- [Change Password](change-password.md)
+- [Forgot Password](forgot-password.md)
+
+---
+
+# Reference
 
 - [CLI Reference](cli-reference.md)
-
 - [Architecture](architecture.md)
+- [FAQ](faq.md)
 
-- [Firmware](firmware/README.md)
-  - [Server Pure](firmware/pure.md)
-  - [Server One (2023)](firmware/one-2023.md)
+---
 
-- [FAQ](faq/README.md)
+# Firmware
+
+- [Server Pure](firmware-pure.md)
+- [Server One (2023)](firmware-one-2023.md)

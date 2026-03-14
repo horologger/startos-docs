@@ -10,7 +10,7 @@ Think of it as a "virtual router in the cloud." Use it for private remote access
 - **Open source** — audit it, fork it, own it
 
 > [!NOTE]
-> For setup instructions, see the [User Manual](./user-manual/).
+> For setup instructions, see [Installing](installing.md).
 
 ## Features
 

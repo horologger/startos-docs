@@ -12,7 +12,7 @@ build-dir = "../docs/start-os"
 [output]
 
 [output.html]
-sidebar-header-nav = true
+sidebar-header-nav = false
 admonitions = true
 no-section-label = false
 default-theme = "ayu"
@@ -22,7 +22,3 @@ additional-js = ["./theme/docs-agent-init.js", "./theme/docs-agent.js", "./theme
 git-repository-url = "https://github.com/start9labs/docs"
 edit-url-template = "https://github.com/start9labs/docs/edit/master/start-os/{path}"
 site-url = "/start-os/"
-
-[output.html.fold]
-enable = true
-level = 0

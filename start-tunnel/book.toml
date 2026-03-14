@@ -12,7 +12,7 @@ build-dir = "../docs/start-tunnel"
 [output]
 
 [output.html]
-sidebar-header-nav = true
+sidebar-header-nav = false
 admonitions = true
 no-section-label = false
 default-theme = "ayu"

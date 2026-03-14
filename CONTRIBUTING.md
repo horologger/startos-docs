@@ -37,7 +37,11 @@ We welcome contributions! Whether you spot a typo or want to suggest new content
 
 ## Writing Docs
 
-All documentation lives under `start-os/src/`, `start-tunnel/src/`, `packaging/src/`, or `bitcoin-guides/src/` as Markdown files. The sidebar for each book is defined by its `src/SUMMARY.md`.
+All documentation lives under `start-os/src/`, `start-tunnel/src/`, `packaging/src/`, or `bitcoin-guides/src/` as flat Markdown files (no subdirectory nesting). The sidebar for each book is defined by its `src/SUMMARY.md`, which uses `# Part Title` lines to create section headers and `---` for visual separators.
+
+### Page Structure
+
+Every page should have introductory prose (1–2 sentences) between the H1 heading and the first H2. This text is auto-extracted for `llms.txt` to help AI decide which pages to fetch. When creating a new page, add it to the book's `src/SUMMARY.md` or it won't appear in the sidebar or build.
 
 ### Admonitions
 

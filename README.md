@@ -8,8 +8,8 @@ The official documentation for [Start9](https://start9.com) products — coverin
 
 | Product | URL | Content |
 |---------|-----|---------|
-| [StartOS](start-os/) | [docs.start9.com/start-os](https://docs.start9.com/start-os/) | Installation, user manual, architecture, FAQ, firmware |
-| [StartTunnel](start-tunnel/) | [docs.start9.com/start-tunnel](https://docs.start9.com/start-tunnel/) | Installation, user manual, architecture, FAQ |
+| [StartOS](start-os/) | [docs.start9.com/start-os](https://docs.start9.com/start-os/) | Setup, services, networking, backups, system admin, firmware |
+| [StartTunnel](start-tunnel/) | [docs.start9.com/start-tunnel](https://docs.start9.com/start-tunnel/) | Installation, subnets, devices, port forwarding, architecture |
 | [Service Packaging](packaging/) | [docs.start9.com/packaging](https://docs.start9.com/packaging/) | Developer guide for building and publishing StartOS services |
 | [Bitcoin Guides](bitcoin-guides/) | [docs.start9.com/bitcoin-guides](https://docs.start9.com/bitcoin-guides/) | Guides for running Bitcoin and related services on StartOS |
 
@@ -20,7 +20,7 @@ Built with [mdBook](https://rust-lang.github.io/mdBook/) and deployed via rsync 
 On push to `master`, GitHub Actions:
 1. Builds all books into versioned `docs/` output directories
 2. Generates `llms.txt` and `llms-full.txt` for LLM consumption
-3. Indexes the content for the embedded [Start Bot](widget/) chat widget via RAG ([Voyage AI](https://www.voyageai.com/) embeddings + [start9-me](https://github.com/Start9Labs/start9-me) semantic search)
+3. Indexes the content for the embedded [Start Bot](widget/) chat widget via RAG ([Voyage AI](https://www.voyageai.com/) embeddings + [support-server](https://github.com/Start9Labs/support-server) semantic search)
 4. Deploys to the VPS via rsync and reloads nginx
 
 ## Getting Started

@@ -1,19 +1,27 @@
 # Summary
 
-[StartTunnel](README.md)
+[StartTunnel Documentation](README.md)
 
 ---
 
-- [Installing](installing/README.md)
+# Getting Started
 
-- [User Manual](user-manual/README.md)
-  - [Subnets](user-manual/subnets.md)
-  - [Devices](user-manual/devices.md)
-  - [Port Forwarding](user-manual/port-forwarding.md)
-  - [Updating / Uninstalling](user-manual/updating.md)
+- [Installing](installing.md)
+
+---
+
+# User Manual
+
+- [Subnets](subnets.md)
+- [Devices](devices.md)
+- [Port Forwarding](port-forwarding.md)
+- [Updating](updating.md)
+- [Uninstalling](uninstalling.md)
+
+---
+
+# Reference
 
 - [CLI Reference](cli-reference.md)
-
 - [Architecture](architecture.md)
-
 - [FAQ](faq.md)

@@ -12,29 +12,31 @@ start-docs/
 │   └── src/
 │       ├── SUMMARY.md
 │       ├── README.md
-│       ├── architecture.md
-│       ├── installing.md
-│       ├── user-manual/
-│       ├── faq/
-│       └── firmware/
+│       ├── installing-startos.md, initial-setup.md, trust-ca.md
+│       ├── marketplace.md, installing.md, updating.md, ...
+│       ├── lan.md, tor.md, clearnet.md, dns.md, ...
+│       ├── backup-create.md, backup-restore.md
+│       ├── ssh.md, smtp.md, wifi.md, ...
+│       ├── cli-reference.md, architecture.md, faq.md
+│       ├── firmware-pure.md, firmware-one-2023.md
+│       └── assets/firmware/
 ├── start-tunnel/         ← StartTunnel book
 │   ├── book.toml
 │   ├── theme -> ../theme
 │   └── src/
 │       ├── SUMMARY.md
 │       ├── README.md
-│       ├── architecture.md
-│       ├── installing/
-│       ├── user-manual/
-│       └── faq.md
+│       ├── installing.md
+│       ├── subnets.md, devices.md, port-forwarding.md
+│       ├── updating.md, uninstalling.md
+│       ├── cli-reference.md, architecture.md, faq.md
 ├── packaging/            ← Service Packaging book
 │   ├── book.toml
 │   ├── theme -> ../theme
 │   └── src/
 │       ├── SUMMARY.md
 │       ├── README.md
-│       ├── environment-setup.md
-│       ├── quick-start.md
+│       ├── environment-setup.md, quick-start.md
 │       ├── ... (14 guide pages)
 │       └── assets/
 ├── bitcoin-guides/       ← Bitcoin Guides book
@@ -43,11 +45,7 @@ start-docs/
 │   └── src/
 │       ├── SUMMARY.md
 │       ├── README.md
-│       ├── archival-vs-pruned.md
-│       ├── electrum-servers.md
-│       ├── bitcoin-wallets.md
-│       ├── lightning-wallets.md
-│       └── lnd-migration.md
+│       └── archival-vs-pruned.md, electrum-servers.md, ...
 ├── landing/              ← Static landing page at docs.start9.com/
 ├── theme/                ← Shared theme (CSS, JS, favicon)
 ├── widget/               ← docs-agent chat widget (TypeScript)
@@ -59,7 +57,7 @@ start-docs/
 This design was chosen over a single monolithic book because:
 - Each product gets its own sidebar, search, and URL namespace
 - Adding a new product means adding a new directory, not restructuring existing content
-- Books can have different structures while sharing a consistent top-level pattern (Installing, User Manual, Architecture, FAQ)
+- Books can have different structures while sharing a flat page layout with sidebar section headers (`# Part Title` in SUMMARY.md)
 
 ## Shared Theme
 
@@ -110,4 +108,4 @@ The deploy key is stored as the `DOCS_DEPLOY_KEY` GitHub Actions secret.
 
 ## Cross-Book Links
 
-mdBook validates links within a single book. Links between books use unversioned absolute paths (`/start-tunnel/user-manual/devices.html`) — nginx redirects these to the latest versioned path. These are not validated at build time. There are only a handful of these.
+mdBook validates links within a single book. Links between books use unversioned absolute paths (`/start-tunnel/devices.html`) — nginx redirects these to the latest versioned path. These are not validated at build time. There are only a handful of these.
