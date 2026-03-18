@@ -8,8 +8,16 @@ Navigate to **Settings > Version > Check for Updates**.
 
 ## CLI
 
+Check for updates:
+
 ```bash
-start-tunnel update
+start-tunnel update check
+```
+
+Install the latest version:
+
+```bash
+start-tunnel update apply
 ```
 
 ## Install script

@@ -4,6 +4,9 @@ A private domain works like your server's [mDNS address](mdns.md), except it als
 
 Private domains can only be accessed when connected to the same LAN as your server, either physically or via VPN, and they require trusting your server's Root CA.
 
+> [!NOTE]
+> Private domains are currently only supported for **router** gateways. StartTunnel gateway support for private domains is planned for a future release.
+
 ## Adding a Private Domain
 
 1. If you haven't already, assign a static IP address to your server on the LAN. Refer to your router's user manual for detailed instructions.
@@ -18,16 +21,12 @@ Private domains can only be accessed when connected to the same LAN as your serv
 
 ## DNS for Private Domains
 
-Private domains require your gateway to use StartOS for DNS. StartOS will test this automatically when you add a private domain and guide you through the setup if needed. The details depend on your gateway type:
+Private domains require your gateway to use StartOS for DNS. StartOS will test this automatically when you add a private domain and guide you through the setup if needed.
 
-- **Router**: Set StartOS as your router's primary DNS server. All routers support this feature. Refer to your router's user manual for detailed instructions.
+Set StartOS as your router's primary DNS server. All routers support this feature. Refer to your router's user manual for detailed instructions.
 
-  > [!WARNING]
-  > It is possible that StartOS is already using your router for DNS. In this case, you cannot instruct your router to use StartOS for DNS, as this would be circular. If StartOS detects a potential circular DNS situation, it will warn you. To resolve this, switch to [static DNS servers](dns.md#static-dns-servers) so StartOS no longer relies on your router.
-
-- **StartTunnel**: SSH into your StartTunnel VPS and run the following command:
-
-      start-tunnel dns defer
+> [!WARNING]
+> It is possible that StartOS is already using your router for DNS. In this case, you cannot instruct your router to use StartOS for DNS, as this would be circular. If StartOS detects a potential circular DNS situation, it will warn you. To resolve this, switch to [static DNS servers](dns.md#static-dns-servers) so StartOS no longer relies on your router.
 
 > [!TIP]
 > If your private domain is a real domain that you control, you can alternatively configure its DNS record at your registrar to resolve to your server's _LAN IP address_. In this case, the StartOS DNS server is not needed.
