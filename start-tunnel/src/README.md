@@ -18,6 +18,6 @@ A self-hosted WireGuard VPN optimized for creating VLANs and reverse tunneling t
 
 ## Reference
 
-- [CLI Reference](cli-reference.md)
+- [start-tunnel CLI](cli-reference.md)
 - [Architecture](architecture.md)
 - [FAQ](faq.md)

@@ -26,6 +26,7 @@
 - [Health Checks](health-checks.md)
 - [Tasks](tasks.md)
 - [Dependencies](dependencies.md)
+- [Accessing Service Containers](service-containers.md)
 
 ---
 
@@ -73,9 +74,16 @@
 
 ---
 
+# CLI Tools
+
+- [start-cli](cli-reference.md)
+- [start-registry](start-registry-cli.md)
+- [start-container](start-container-cli.md)
+
+---
+
 # Reference
 
-- [CLI Reference](cli-reference.md)
 - [Architecture](architecture.md)
 - [FAQ](faq.md)
 

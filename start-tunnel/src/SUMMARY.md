@@ -22,6 +22,6 @@
 
 # Reference
 
-- [CLI Reference](cli-reference.md)
+- [start-tunnel CLI](cli-reference.md)
 - [Architecture](architecture.md)
 - [FAQ](faq.md)
