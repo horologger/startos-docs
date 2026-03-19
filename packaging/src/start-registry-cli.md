@@ -1,4 +1,4 @@
-# start-registry Reference
+# start-registry CLI Reference
 
 The `start-registry` CLI manages a StartOS package registry — the server that hosts, indexes, and distributes s9pk packages and OS updates. Run it on the registry server, or use `start-cli registry` to manage it remotely.
 

@@ -74,16 +74,9 @@
 
 ---
 
-# CLI Tools
-
-- [start-cli](cli-reference.md)
-- [start-registry](start-registry-cli.md)
-- [start-container](start-container-cli.md)
-
----
-
 # Reference
 
+- [start-cli](cli-reference.md)
 - [Architecture](architecture.md)
 - [FAQ](faq.md)
 

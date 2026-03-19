@@ -2,7 +2,7 @@
 
 The primary CLI for managing a StartOS server. Connect via [SSH](ssh.md) to run commands locally, or use `--host` to manage a server remotely. Pass `-h` at any level to see subcommands and options.
 
-`start-cli` also includes `registry` and `tunnel` subcommand groups — these are documented separately in the [start-registry Reference](start-registry-cli.md) and the [StartTunnel CLI Reference](/start-tunnel/cli-reference.html).
+`start-cli` also includes `registry` and `tunnel` subcommand groups — these are documented separately in the [start-registry CLI Reference](/packaging/start-registry-cli.html) and the [StartTunnel CLI Reference](/start-tunnel/cli-reference.html).
 
 ## Global Options
 

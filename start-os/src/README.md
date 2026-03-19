@@ -60,14 +60,9 @@ StartOS is a sovereign computing platform that makes it easy to run a personal s
 - [Change Password](change-password.md)
 - [Forgot Password](forgot-password.md)
 
-## CLI Tools
-
-- [start-cli](cli-reference.md)
-- [start-registry](start-registry-cli.md)
-- [start-container](start-container-cli.md)
-
 ## Reference
 
+- [start-cli](cli-reference.md)
 - [Architecture](architecture.md)
 - [FAQ](faq.md)
 
