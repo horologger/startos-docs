@@ -4,8 +4,8 @@ A private domain works like your server's [mDNS address](mdns.md), except it als
 
 Private domains can only be accessed when connected to the same LAN as your server, either physically or via VPN, and they require trusting your server's Root CA.
 
-> [!NOTE]
-> Private domains are currently only supported for **router** gateways. StartTunnel gateway support for private domains is planned for a future release.
+> [!WARNING]
+> Private domains can only be added to **Ethernet** and **Wireless** gateways. They cannot be added to WireGuard (StartTunnel) gateways. This is because private domains rely on your local network's DNS configuration, which WireGuard gateways do not control.
 
 ## Adding a Private Domain
 
