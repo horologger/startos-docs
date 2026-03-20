@@ -5,6 +5,7 @@ StartOS is a sovereign computing platform that makes it easy to run a personal s
 ## Getting Started
 
 - [Installing StartOS](installing-startos.md)
+- [Update to StartOS 0.4.0](update-040.md)
 - [Initial Setup](initial-setup.md)
 - [Trusting Your Root CA](trust-ca.md)
 
@@ -42,7 +43,7 @@ StartOS is a sovereign computing platform that makes it easy to run a personal s
 - [Gateways](gateways.md)
 - [Private Domains](private-domains.md)
 - [DNS](dns.md)
-- [DCGNATS](cgnat.md)
+- [CGNAT](cgnat.md)
 
 ## Backups
 

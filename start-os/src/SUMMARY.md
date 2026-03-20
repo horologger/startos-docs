@@ -7,6 +7,7 @@
 # Getting Started
 
 - [Installing StartOS](installing-startos.md)
+- [Update to StartOS 0.4.0](update-040.md)
 - [Initial Setup](initial-setup.md)
 - [Trusting Your Root CA](trust-ca.md)
 
