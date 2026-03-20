@@ -6,6 +6,9 @@ Public access means making your services reachable by anyone on the Internet, no
 
 Public access is for services you intentionally want to share with others. For example, hosting a personal website, a Nostr relay, a Lightning node, or a Nextcloud instance for your family. If only you and your own devices need access, use [private access](private-access.md) instead.
 
+> [!WARNING]
+> If your ISP uses [CGNAT](cgnat.md), your router cannot accept inbound connections. Clearnet hosting and public IP access require a [StartTunnel](/start-tunnel/) gateway. Tor and Holesail work regardless of CGNAT.
+
 ## Strategies
 
 - **[Clearnet](clearnet.md)** — Host services on the public Internet using standard domains (`.com`, `.net`, etc.). Requires [gateway](gateways.md) selection, a domain name, DNS configuration, and port forwarding. Anyone can access your service using a normal browser.

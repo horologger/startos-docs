@@ -14,6 +14,9 @@ For hosting websites or APIs that people access in a browser, use a [public doma
 
 1. Find its public IPv4 address and toggle it on.
 
+> [!WARNING]
+> If your ISP uses [CGNAT](cgnat.md), you cannot use your router gateway for public IP access because port forwarding will not work. Use a [StartTunnel](/start-tunnel/) gateway instead.
+
 ## IP Stability
 
 If your gateway is your home router, be aware that your ISP can change your home IP address at any time. When this happens, any peers or services configured to reach you at the old IP will lose connectivity. Unlike [clearnet domains](clearnet.md), there is no dynamic DNS equivalent for raw IP addresses.

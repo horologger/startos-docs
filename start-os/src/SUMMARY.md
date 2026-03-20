@@ -50,6 +50,7 @@
 - [Gateways](gateways.md)
 - [Private Domains](private-domains.md)
 - [DNS](dns.md)
+- [CGNAT](cgnat.md)
 
 ---
 

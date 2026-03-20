@@ -6,6 +6,9 @@ Make your services publicly reachable on the Internet using standard domains (`.
 
 This connection method permits hosting a service interface on the public Internet.
 
+> [!WARNING]
+> If your ISP uses [CGNAT](cgnat.md), your router cannot accept inbound connections and port forwarding will not work. You **must** use a [StartTunnel](/start-tunnel/) gateway for clearnet hosting.
+
 ## Choosing a Gateway
 
 When hosting services on the clearnet, anyone who connects will know the IP address of the gateway used. Knowing a gateway's IP address reveals its approximate geographic location:
@@ -25,7 +28,7 @@ If your gateway is your home router, you are revealing the approximate location 
 | **Cost** | Free | VPS rental (~$5–10/mo) |
 | **IP stability** | Home IP can change without warning, breaking all your domains until DNS is updated. [Dynamic DNS](https://en.wikipedia.org/wiki/Dynamic_DNS) is highly recommended, but support varies by router and may cost money. | Static IP from the VPS provider. No dynamic DNS needed. |
 | **Privacy** | Exposes your home's approximate location | Exposes the VPS location, not your home |
-| **CGNAT compatible** | No. If your ISP uses <a href="https://en.wikipedia.org/wiki/Carrier-grade_NAT" target="_blank" noreferrer>CGNAT</a> (e.g. Starlink), you cannot use your router as a gateway. | Yes |
+| **CGNAT compatible** | No. If your ISP uses [CGNAT](cgnat.md), you cannot use your router as a gateway. | Yes |
 | **Port forwarding** | Configured in router admin panel | Configured in [StartTunnel](/start-tunnel/port-forwarding.html) |
 
 ## Adding a Public Domain

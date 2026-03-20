@@ -11,6 +11,9 @@ Think of your server's [gateway](gateways.md) as a defense perimeter with hundre
 
 Most modern routers include a VPN server feature. If so, it is usually the preferred method for private, remote access to your server.
 
+> [!WARNING]
+> If your ISP uses [CGNAT](cgnat.md), your router cannot accept inbound connections, so a router-based VPN will not work. Use [Option 2: StartTunnel](#option-2-starttunnel) instead.
+
 1. If you haven't already, assign a static IP address to your server on the LAN. Refer to your router's user manual for detailed instructions.
 
 1. Since home IP addresses can change without warning, we highly recommend setting up [dynamic DNS](https://en.wikipedia.org/wiki/Dynamic_DNS). Many routers offer this as a built-in feature. If not, third-party services are available. Without dynamic DNS, a change to your home IP will disconnect all VPN clients until you re-download configuration files for each one.

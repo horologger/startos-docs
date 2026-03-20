@@ -13,6 +13,9 @@ Every gateway routes outbound traffic from your server to the Internet. Some gat
 > [!NOTE]
 > If you are running StartOS on a VPS with a public IP address, there is no router gateway. Your server's network interface is directly exposed to the Internet.
 
+> [!WARNING]
+> If your ISP uses [CGNAT](cgnat.md), your router **cannot** accept inbound connections, even with port forwarding configured. This means your router gateway is effectively outbound-only: it cannot be used for [clearnet hosting](clearnet.md), [public IP access](public-ip.md), or [inbound VPN](inbound-vpn.md). Use a [StartTunnel](/start-tunnel/) gateway instead.
+
 ## Adding a Gateway
 
 1. Navigate to `System > Gateways` and click "Add".
