@@ -42,6 +42,7 @@ StartOS is a sovereign computing platform that makes it easy to run a personal s
 - [Gateways](gateways.md)
 - [Private Domains](private-domains.md)
 - [DNS](dns.md)
+- [DCGNATS](cgnat.md)
 
 ## Backups
 
