@@ -79,14 +79,31 @@ The migration process can take **hours**, depending on how much data you have. B
 
 ## Step 10: Reboot
 
-When the update is complete, follow the on-screen instructions to remove the USB drive and reboot. You're done!
+When the update is complete, follow the on-screen instructions to remove the USB drive and reboot.
 
-## After Updating
+## Step 11: Update All Services
 
-StartOS 0.4.0 is a fundamentally different system from 0.3.x. Take time to explore the new UI and read the documentation — the docs include a support chat where you can get help using your support access code.
+Every installed service will have an update available for the 0.4.0 marketplace. Update **all** of them — including Bitcoin — before doing anything else. The 0.4.0 versions are repackaged for the new system, even if the underlying software version is the same.
+
+## Step 12: Create a Fresh Backup
+
+Before starting any services, create a [full system backup](backup-create.md) to a **fresh drive**.
+
+> [!WARNING]
+> Backups from StartOS 0.3.5.1 **cannot** be restored onto 0.4.0. You need a 0.4.0 backup. This is your safety net going forward — do not skip it.
+
+## Step 13: Start Your Services
+
+Once all services are updated and backed up, you can start them.
+
+## Notes
 
 ### Tor Cleanup
 
 During migration, the **Tor** service is automatically installed with all your existing onion addresses intact. However, Tor is rarely needed in StartOS 0.4.0 — most users will be better served by [LAN](lan.md), [VPN](inbound-vpn.md), [clearnet](clearnet.md), or [Holesail](holesail.md) access.
 
 You are encouraged to review your service interfaces and delete any Tor addresses you no longer need. To manage onion addresses, open the Tor service and go to **Actions > Manage Onion Services**.
+
+### Explore the New System
+
+Take time to explore the new UI and read the documentation. StartOS 0.4.0 is a fundamentally different system from 0.3.x. The docs include a support chat where you can get help using your support access code.
